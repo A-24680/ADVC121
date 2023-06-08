@@ -1,0 +1,94 @@
+<html>
+    <head>
+    <title>case-study-project-between-googleLens-mobilenet</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
+    <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+  
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <h3 class="btn btn-primary heading">CASE STUDY BETWEEN GOOGLE LENS AND MOBILENET
+        <hr>
+        <center>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 heading_div">
+            GOOGLE LENS<span><img src="data:image/jpeg;base64,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" class="img-responsive"></span>
+            <br>
+            VS
+            <br>
+              <div class="btn heading_div2">
+              MOBILENET
+              </div>
+            </div>
+        </center>
+        <br>
+      </h3>
+      <hr>
+    <ol>
+        <div class="test_image_and_result col-xs-12">
+            <li class="col-sm-4 col-xs-12">
+                <b>Test Image -</b>
+                <img src="https://th.bing.com/th/id/R.88674a37a394a6fded2be28d48ea8ca7?rik=JjNVmG7tyb5I5Q&riu=http%3a%2f%2fwww.pngall.com%2fwp-content%2fuploads%2f5%2fSports-Ball-Transparent.png&ehk=rCanBJ3gTLFUOiFTP243j1XnfTRQ3wQdwhBJGh%2bCaCw%3d&risl=&pid=ImgRaw&r=0" class="img-responsive">
+            </li>
+            <h5 class="col-sm-4 col-xs-12">
+                Output on <b>GOOGLE LENS : </b>
+                <span>Soccer Ball</span>
+            </h5>
+            <h5 class="col-sm-4 col-xs-12">
+                Output on <b>MOBILENET MODEL</b>
+                <span>Ball</span>
+            </h5>
+            <div class="mini_result" class="col-xs-12">
+                <h4>Result - </h4>
+                <hr>
+                <h4>Google Lens is <b>more accurate</b> than MobileNet</h4>
+            </div>
+        </div>
+        <br>
+        <div class="test_image_and_result col-xs-12">
+            <li class="col-sm-4 col-xs-12">
+                <b>Test Image -</b>
+                <img src="https://th.bing.com/th/id/OIP.UZQzfkvsSUzkzNx1RZQSqQHaHa?pid=ImgDet&rs=1" class="img-responsive">
+            </li>
+            <h5 class="col-sm-4 col-xs-12">
+                Output on <b>GOOGLE LENS</b>
+                <span>Umpire's Hat</span>
+            </h5>
+            <h5 class="col-sm-4 col-xs-12">
+                Output on <b>MOBILENET MODEL</b>
+                <span>Cricket Hat</span>
+            </h5>
+            <div class="mini_result" class="col-xs-12">
+                <h4>Result - </h4>
+                <hr>
+                <h4>Google Lens is <b>more accurate</b> than MobileNet</h4>
+            </div>
+        </div>
+        <br>
+        <div class="test_image_and_result col-xs-12">
+            <li class="col-sm-4 col-xs-12">
+                <b>Test Image -</b>
+                <img src="https://th.bing.com/th?id=OIP.aVEdxg8H6pJJpGm6EY4T1gHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=2&pid=3.1&rm=2" class="img-responsive">
+            </li>
+            <h5 class="col-sm-4 col-xs-12">
+                Output on <b>GOOGLE LENS</b>
+                <span>Cricket Bat</span>
+            </h5>
+            <h5 class="col-sm-4 col-xs-12">
+                Output on <b>MOBILENET MODEL</b>
+                <span>Bat</span>
+            </h5>
+            <div class="mini_result" class="col-xs-12">
+                <h4>Result - </h4>
+                <hr>
+                <h4>Google Lens is <b>more accurate</b> than MobileNet</h4>
+            </div>
+        </div>
+        <br>
+    </ol>
+  </body>
+</html>
